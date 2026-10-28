@@ -2,6 +2,8 @@ import { MongoClient } from 'mongodb';
 
 let database;
 
+
+// Connect to MongoDB Atlas using environment variables.
 const connectToDb = async () => {
   const connectionString = process.env.MONGODB_URI;
   if (!connectionString) {
