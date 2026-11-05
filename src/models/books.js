@@ -14,4 +14,30 @@ const getBookById = async (bookId) => {
   return book;
 };
 
-export { getAllBooks, getBookById };
+const createBook = async (book) => {
+  const db = getDb();
+  await db.collection('books').insertOne(book);
+  return book;
+};
+
+const updateBook = async (bookId, book) => {
+  const db = getDb();
+  return await db.collection('books').findOneAndUpdate(
+    { id: bookId },
+    { $set: book },
+    { returnDocument: 'after' }
+  );
+};
+
+const deleteBook = async (bookId) => {
+  const db = getDb();
+  return await db.collection('books').deleteOne({ id: bookId });
+};
+
+export {
+  getAllBooks,
+  getBookById,
+  createBook,
+  updateBook,
+  deleteBook
+};
